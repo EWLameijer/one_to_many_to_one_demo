@@ -21,7 +21,7 @@ public class Basket {
 
     private final LocalDateTime dateTime = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "basket", cascade = CascadeType.ALL)
     @JsonManagedReference
     private final Set<BasketItem> items = new HashSet<>();
 
