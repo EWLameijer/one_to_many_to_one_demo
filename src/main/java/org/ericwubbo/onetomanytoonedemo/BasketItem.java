@@ -21,4 +21,10 @@ public class BasketItem {
     private Item item;
 
     private int quantity;
+
+    public BasketItem(Basket basket, Item item, int quantity) {
+        this.basket = basket;
+        this.item = item;
+        this.quantity = quantity;
+    }
 }

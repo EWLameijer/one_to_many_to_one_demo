@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -21,4 +22,8 @@ public class Basket {
 
     @OneToMany(mappedBy = "basket")
     private final Set<BasketItem> items = new HashSet<>();
+
+    public void addAll(Collection<BasketItem> items) {
+        this.items.addAll(items);
+    }
 }
