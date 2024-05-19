@@ -24,8 +24,7 @@ public class BasketItem {
 
     private int quantity;
 
-    public BasketItem(Basket basket, Item item, int quantity) {
-        this.basket = basket;
+    public BasketItem(Item item, int quantity) {
         this.item = item;
         this.quantity = quantity;
     }

@@ -26,16 +26,16 @@ public class BasketController {
     public ResponseEntity<Basket> create(@RequestBody List<BasketItemDto> basketItemDtos, UriComponentsBuilder ucb) {
         Basket basket = new Basket();
         List<BasketItem> basketItems = basketItemDtos.stream().
-                map(basketItem -> basketItemOf(basketItem, basket)).toList();
+                map(basketItem -> basketItemOf(basketItem)).toList();
         basket.addAll(basketItems);
         basketRepository.save(basket);
         URI location = ucb.path("api/v1/baskets/{basketId}").buildAndExpand(basket.getId()).toUri();
         return ResponseEntity.created(location).body(basket);
     }
 
-    private BasketItem basketItemOf(BasketItemDto basketItemDto, Basket basket) {
+    private BasketItem basketItemOf(BasketItemDto basketItemDto) {
         Long id = basketItemDto.id();
         Item item = itemRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Unknown item id " + id));
-        return new BasketItem(basket, item, basketItemDto.quantity());
+        return new BasketItem(item, basketItemDto.quantity());
     }
 }
