@@ -1,5 +1,6 @@
 package org.ericwubbo.onetomanytoonedemo;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class BasketItem {
     private UUID id;
 
     @ManyToOne
+    @JsonBackReference
     private Basket basket;
 
     @ManyToOne

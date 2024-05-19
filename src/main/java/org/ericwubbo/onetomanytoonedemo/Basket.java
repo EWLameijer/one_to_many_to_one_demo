@@ -1,5 +1,6 @@
 package org.ericwubbo.onetomanytoonedemo;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Basket {
     private final LocalDateTime dateTime = LocalDateTime.now();
 
     @OneToMany(mappedBy = "basket")
+    @JsonManagedReference
     private final Set<BasketItem> items = new HashSet<>();
 
     public void addAll(Collection<BasketItem> items) {
