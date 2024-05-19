@@ -2,14 +2,12 @@ package org.ericwubbo.onetomanytoonedemo;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +16,11 @@ public class BasketController {
     private final ItemRepository itemRepository;
 
     private final BasketRepository basketRepository;
+
+    @GetMapping("{id}")
+    public ResponseEntity<Basket> getById(@PathVariable UUID id) {
+        return basketRepository.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+    }
 
     @PostMapping
     public ResponseEntity<Basket> create(@RequestBody List<BasketItemDto> basketItemDtos, UriComponentsBuilder ucb) {
