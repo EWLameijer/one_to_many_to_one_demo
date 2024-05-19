@@ -20,9 +20,9 @@ public class BasketController {
     private final BasketRepository basketRepository;
 
     @PostMapping
-    public ResponseEntity<Basket> create(@RequestBody BasketDto basketDto, UriComponentsBuilder ucb) {
+    public ResponseEntity<Basket> create(@RequestBody List<BasketItemDto> basketItemDtos, UriComponentsBuilder ucb) {
         Basket basket = new Basket();
-        List<BasketItem> basketItems = basketDto.basketItemDtos().stream().
+        List<BasketItem> basketItems = basketItemDtos.stream().
                 map(basketItem -> basketItemOf(basketItem, basket)).toList();
         basket.addAll(basketItems);
         basketRepository.save(basket);
